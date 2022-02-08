@@ -1,0 +1,41 @@
+buildscript {
+    repositories{
+        flatDir dirs: '../progaurd6.2.2/lib'
+    }
+    dependencies{
+        classpath: ':progaurd'
+    }
+}
+
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
+    implementation 'junit:junit:4.13.2'
+    implementation 'org.apache.commons:commons-csv:1.9.0'
+}
+
+
+application {
+    mainClassName = 'csci2020u.lab02.CSVDemo'
+    version = '1.0'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': mainClassName,
+    'Implementation-Title': 'Lab03',
+    'Implementation-Version': 'version'
+    
+    }
+}
+
+// task(minify,dependsOn:'jar', type: progaurd.gradle.ProGuardTask) {
+//     config
+// }
