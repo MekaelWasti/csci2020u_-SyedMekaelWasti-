@@ -34,6 +34,9 @@
     <TextField fx:id="email" promptText="E-mail"
                GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
+    <Label fx:id="emailCheck" text=""
+           GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+
     <Label text="Phone #:"
            GridPane.columnIndex="0" GridPane.rowIndex="5"/>
 
@@ -47,6 +50,6 @@
                GridPane.columnIndex="1" GridPane.rowIndex="6"/>
 
 
-    <Button onAction="#onHelloButtonClick"  GridPane.columnIndex="1" GridPane.rowIndex="7">Register</Button>
+    <Button onAction="#onRegisterButtonClick"  GridPane.columnIndex="1" GridPane.rowIndex="7">Register</Button>
 
 </GridPane>

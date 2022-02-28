@@ -9,6 +9,7 @@ module lab04.lab04 {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires commons.validator;
 
     opens lab04.lab04 to javafx.fxml;
     exports lab04.lab04;
