@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.GridPane?>
+
+
+<?import javafx.scene.control.TextField?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.lab06.HelloController">
+
+<!--    <center>-->
+<!--        <Canvas fx:id="canvas" width = "300" height="250" />-->
+<!--    </center>-->
+
+<!--    <bottom>-->
+<!--        <Button BorderPane.alignment="CENTER" fx:id="drawButton"  text="Draw" onAction="#onDrawActionClick"/>-->
+<!--    </bottom>-->
+
+<!--    <BarChart fx:id="barChart" layoutX="-40.0" layoutY="-3.0" prefHeight="205.0" prefWidth="409.0">-->
+<!--    </BarChart>-->
+
+</BorderPane>
+
+<!--Lab 6 stuff-->
