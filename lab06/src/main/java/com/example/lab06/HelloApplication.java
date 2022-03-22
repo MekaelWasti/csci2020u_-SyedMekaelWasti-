@@ -100,7 +100,7 @@ public class HelloApplication extends Application {
         hBox.getChildren().add(bar);
         hBox.getChildren().add(pie);
         Scene scene = new Scene(hBox, 1000, 500);
-        stage.setTitle("Lab 06 Solution!");
+        stage.setTitle("Lab 06 Solution");
         stage.setScene(scene);
         stage.show();
 
