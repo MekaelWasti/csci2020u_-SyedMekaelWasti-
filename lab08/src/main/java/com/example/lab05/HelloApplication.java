@@ -7,6 +7,10 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -160,6 +164,37 @@ public class HelloApplication extends Application {
         stage.setTitle("Lab 08 Solution");
         stage.setScene(scene);
         stage.show();
+
+        //Save Ctrl+S command
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            final KeyCombination keyCombination = new KeyCodeCombination(KeyCode.S,
+                    KeyCombination.CONTROL_DOWN);
+            public void handle(KeyEvent keyE) {
+                if (keyCombination.match(keyE)) {
+                    try {
+                        save(fileChooser,stage,currentSource,currentFilePath);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    keyE.consume(); // <-- stops passing the event to next node
+                }
+            }
+        });
+        //Save As Ctrl+Shift+S command
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            final KeyCombination keyCombination = new KeyCodeCombination(KeyCode.S,
+                    KeyCombination.CONTROL_DOWN,KeyCombination.SHIFT_DOWN);
+            public void handle(KeyEvent keyE) {
+                if (keyCombination.match(keyE)) {
+                    try {
+                        saveAs(fileChooser,stage,currentSource);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    keyE.consume(); // <-- stops passing the event to next node
+                }
+            }
+        });
     }
 
     public File open(FileChooser fileChooser, Stage stage, TableView tableView) throws IOException {
