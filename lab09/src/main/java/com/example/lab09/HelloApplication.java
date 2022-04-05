@@ -27,11 +27,9 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        //Arrays
-        float[] stockClosingPrices1 = new float[72];
-        float[] stockClosingPrices2 = new float[72];
-
         //Call Methods
+        float[] stockClosingPrices1 = downloadStockPrices("GOOG");
+        float[] stockClosingPrices2 = downloadStockPrices("AAPL");
         drawLinePlot(stockClosingPrices1, stockClosingPrices2);
 
         //Setup GUI Elements
@@ -42,10 +40,34 @@ public class HelloApplication extends Application {
     }
 
 
-    public void downloadStockPrices(String tickerSymbol) throws IOException {
+    public float[] downloadStockPrices(String tickerSymbol) throws IOException {
         String url = "https://query1.finance.yahoo.com/v7/finance/download/" + tickerSymbol + "?period1=1262322000&period2=1451538000&interval=1mo&events=history&includeAdjustedClose=true";
         InputStream in = new URL(url).openStream();
         Files.copy(in, Paths.get("src/main/resources/com/example/lab09/stock.csv"), StandardCopyOption.REPLACE_EXISTING);
+
+        int maxLength = 73;
+        float[] stockClosingPrices = new float[maxLength];
+
+        //Get Stock Closing prices and populate array with values
+        BufferedReader br = new BufferedReader(new FileReader("src/main/resources/com/example/lab09/stock.csv"));
+        String line = null;
+        int i = 0;
+        while ((line = br.readLine()) != null) {
+            if (i == 0) {
+                i++;
+                continue;
+            }
+            if (i == maxLength) {
+                break;
+            }
+            String[] column = line.split(",");
+            stockClosingPrices[i - 1] = Float.parseFloat(column[4]);
+            i++;
+        }
+        i--;
+        stockClosingPrices[stockClosingPrices.length - 1] = i;
+        br.close();
+        return stockClosingPrices;
     }
 
     public void drawLinePlot(float[] stockClosingPrices1, float[] stockClosingPrices2) throws IOException {
@@ -57,30 +79,14 @@ public class HelloApplication extends Application {
         pane.getChildren().add(yAxis);
 
         //Draw Stock Charts
-        downloadStockPrices("GOOG");
         plotLine(stockClosingPrices1,1);
-        downloadStockPrices("AAPL");
         plotLine(stockClosingPrices2,2);
     }
 
     public void plotLine(float[] stockClosingPrices, int chart) throws IOException {
 
-        //Populate Arrays With Closing Prices
-        BufferedReader br = new BufferedReader(new FileReader("src/main/resources/com/example/lab09/stock.csv"));
-        String line = null;
-        int i = 0;
-        while ((line = br.readLine()) != null) {
-            if (i == 0) {
-                i++;
-                continue;
-            }
-            String[] column = line.split(",");
-            stockClosingPrices[i - 1] = Float.parseFloat(column[4]);
-            i++;
-        }
-        br.close();
-
-        for (int j = 0; j < stockClosingPrices.length - 1; j++) {
+        //Plot Lines using Closing Prices From Arrays
+        for (int j = 0; j < stockClosingPrices[stockClosingPrices.length-1] - 1; j++) {
             int interval = 15;
             double x = 50.00 + j * interval;
             Line stockLine = new Line(x,670 - stockClosingPrices[j] * 0.75,x + interval,670 - stockClosingPrices[j + 1] * 0.75);
