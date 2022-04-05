@@ -61,6 +61,14 @@ public class HelloApplication extends Application {
                 break;
             }
             String[] column = line.split(",");
+
+            //Deal with - out of bounds prices
+            if (Float.parseFloat(column[4]) < 0) {
+                column[4] = "0";
+            }
+            else if (Float.parseFloat(column[4]) > 810) {
+                column[4] = "810";
+            }
             stockClosingPrices[i - 1] = Float.parseFloat(column[4]);
             i++;
         }
