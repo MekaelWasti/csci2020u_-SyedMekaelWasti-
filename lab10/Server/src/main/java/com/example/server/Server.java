@@ -2,6 +2,7 @@ package com.example.server;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -10,6 +11,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 
 import java.io.*;
@@ -99,7 +101,17 @@ public class Server extends Application {
         stage.setTitle("Server");
         stage.setScene(scene);
         stage.show();
+
+
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
     }
+
 
     public static void main(String[] args) {
         launch();
